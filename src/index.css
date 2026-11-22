@@ -1,0 +1,97 @@
+@import "tailwindcss";
+@import "@fontsource/rubik/400.css";
+@import "@fontsource/rubik/500.css";
+@import "@fontsource/rubik/600.css";
+
+/* Luminous Silk tokens, from UX UI/stitch_opalescent_cbt_companion_redesign/luminous_silk_cbt/DESIGN.md.
+   One change: muted text darkened from #5A647B to #525C72 so it passes 4.5:1 on the lilac containers too. */
+@theme {
+  --font-sans: "Rubik", system-ui, sans-serif;
+
+  --color-canvas: #f6f9fc;
+  --color-ink: #1e2538;
+  --color-muted: #525c72;
+  --color-outline: #74777f;
+  --color-outline-variant: #c4c6cf;
+
+  --color-primary: #415d87;
+  --color-primary-container: #5a75a1;
+  --color-primary-fixed: #d5e3ff;
+  --color-on-primary-fixed: #001b3c;
+  --color-secondary: #61549b;
+  --color-secondary-container: #bfb1ff;
+  --color-on-secondary-container: #4d4186;
+  --color-secondary-fixed: #e6deff;
+  --color-tertiary: #874d2a;
+  --color-tertiary-fixed: #ffdbca;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-icy: #e8f2f8;
+  --color-lilac: #e2dcf7;
+  --color-apricot: #fdf0ea;
+
+  --radius-sm: 0.5rem;
+  --radius: 1rem;
+  --radius-md: 1.5rem;
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+html { background: var(--color-canvas); color: var(--color-ink); }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100dvh;
+  background:
+    radial-gradient(60rem 40rem at 100% 0%, var(--color-icy), transparent 60%),
+    radial-gradient(50rem 40rem at 0% 30%, var(--color-lilac), transparent 60%),
+    radial-gradient(40rem 30rem at 50% 100%, var(--color-apricot), transparent 60%),
+    var(--color-canvas);
+  background-attachment: fixed;
+}
+
+/* Layer 1: frosted glass card */
+@utility glass {
+  background: rgb(255 255 255 / 0.72);
+  backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.8);
+  box-shadow: 0 8px 32px -4px rgb(111 138 183 / 0.08);
+}
+/* Layer 2: dock, dialogs */
+@utility glass-strong {
+  background: rgb(255 255 255 / 0.86);
+  backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgb(226 220 247 / 0.6);
+  box-shadow: 0 16px 40px -8px rgb(139 126 200 / 0.14);
+}
+
+:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* 0–100 slider: no fill and a hollow thumb until the person gives a value, so nothing reads as a default answer.
+   RTL: 0 is on the right, so the fill grows from the right. --fill is set inline in ui/kit.tsx. */
+.yomi-range { appearance: none; background: transparent; height: 2.75rem; cursor: pointer; width: 100%; }
+.yomi-range::-webkit-slider-runnable-track {
+  height: 0.5rem; border-radius: 9999px;
+  background: linear-gradient(to left, var(--color-primary) var(--fill, 0%), var(--color-primary-fixed) var(--fill, 0%));
+}
+.yomi-range::-moz-range-track {
+  height: 0.5rem; border-radius: 9999px;
+  background: linear-gradient(to left, var(--color-primary) var(--fill, 0%), var(--color-primary-fixed) var(--fill, 0%));
+}
+.yomi-range::-webkit-slider-thumb {
+  appearance: none; margin-top: -0.625rem; width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--color-primary); border: 3px solid #fff; box-shadow: 0 2px 8px rgb(65 93 135 / 0.35);
+}
+.yomi-range::-moz-range-thumb {
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--color-primary); border: 3px solid #fff; box-shadow: 0 2px 8px rgb(65 93 135 / 0.35);
+}
+.yomi-range.is-unset::-webkit-slider-thumb { background: #fff; border: 2px dashed var(--color-outline); box-shadow: none; }
+.yomi-range.is-unset::-moz-range-thumb { background: #fff; border: 2px dashed var(--color-outline); box-shadow: none; }
