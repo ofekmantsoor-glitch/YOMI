@@ -73,3 +73,25 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* 0–100 slider: no fill and a hollow thumb until the person gives a value, so nothing reads as a default answer.
+   RTL: 0 is on the right, so the fill grows from the right. --fill is set inline in ui/kit.tsx. */
+.yomi-range { appearance: none; background: transparent; height: 2.75rem; cursor: pointer; width: 100%; }
+.yomi-range::-webkit-slider-runnable-track {
+  height: 0.5rem; border-radius: 9999px;
+  background: linear-gradient(to left, var(--color-primary) var(--fill, 0%), var(--color-primary-fixed) var(--fill, 0%));
+}
+.yomi-range::-moz-range-track {
+  height: 0.5rem; border-radius: 9999px;
+  background: linear-gradient(to left, var(--color-primary) var(--fill, 0%), var(--color-primary-fixed) var(--fill, 0%));
+}
+.yomi-range::-webkit-slider-thumb {
+  appearance: none; margin-top: -0.625rem; width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--color-primary); border: 3px solid #fff; box-shadow: 0 2px 8px rgb(65 93 135 / 0.35);
+}
+.yomi-range::-moz-range-thumb {
+  width: 1.75rem; height: 1.75rem; border-radius: 50%;
+  background: var(--color-primary); border: 3px solid #fff; box-shadow: 0 2px 8px rgb(65 93 135 / 0.35);
+}
+.yomi-range.is-unset::-webkit-slider-thumb { background: #fff; border: 2px dashed var(--color-outline); box-shadow: none; }
+.yomi-range.is-unset::-moz-range-thumb { background: #fff; border: 2px dashed var(--color-outline); box-shadow: none; }

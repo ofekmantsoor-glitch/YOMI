@@ -29,7 +29,13 @@ npm install
 cp .env.example .env.local   # למלא את הפרטים מ-Supabase → Project Settings → API
 npm run dev                  # http://localhost:5173, וגם מהטלפון באותה רשת
 npm test                     # לוגיקת השבוע ובדיקות ההרשאות על עותק מקומי של מסד הנתונים
+npm run e2e                  # תרחיש הקבלה וכללי המוצר בדפדפן (פעם ראשונה: npx playwright install chromium)
 ```
+
+**מצב הדגמה מקומי (כרגע ברירת המחדל):** האפליקציה רצה בלי שרת, עם נתוני הדגמה בדויים שנשמרים רק בזיכרון ונמחקים ברענון הדף.
+- מטפל: `/therapist`. נכנסים עם `therapist1@yomi.test` או `therapist2@yomi.test`, סיסמה `demo1234`.
+- מטופל: `/`. מצטרפים עם קוד שהמטפל יוצר.
+- בתחתית כל מסך יש "כלי הדגמה": מעבר בין התפקידים, כניסה ישירה כמטופל הדגמה, והדמיה של כשל בשמירה.
 
 הקמת Supabase חד-פעמית: להריץ את `supabase/migrations/001_schema.sql` ב-SQL Editor, ולהפעיל את Authentication → Anonymous sign-ins.
 אחר כך מריצים `npm run demo:reset`. הפקודה מוחקת את כל הנתונים וטוענת נתוני הדגמה בדויים, ולכן צריך `SUPABASE_SERVICE_ROLE_KEY` ו-`DEMO_PASSWORD` ב-`.env.local`.

@@ -1,10 +1,10 @@
-// The only module that talks to the backend (PRD architecture constraint 3).
-// Swapping providers or adding payload encryption happens here and nowhere else.
-import { createClient } from '@supabase/supabase-js'
+// The only module screens use to reach data (PRD architecture constraint 3).
+// Today it is backed by the in-memory demo store. The Supabase version (001_schema.sql has the same rules)
+// replaces `local` here and nowhere else; adding payload encryption also happens here.
+import { local } from './local'
 
-const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
-
-export const backendConfigured = Boolean(url && anonKey)
-
-export const supabase = backendConfigured ? createClient(url!, anonKey!) : null
+export const api = local
+export const isLocalMode = true
+export { demo, LOCAL_DEMO_PASSWORD } from './local'
+export { ApiError } from './types'
+export type * from './types'
