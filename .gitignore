@@ -1,2 +1,16 @@
 # Personal Claude Code settings (per machine)
 .claude/settings.local.json
+
+desktop.ini
+Thumbs.db
+.DS_Store
+node_modules/
+dist/
+*.log
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+.playwright-mcp/
+*.tsbuildinfo

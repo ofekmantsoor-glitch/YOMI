@@ -17,18 +17,28 @@
 
 ## מצב הפרויקט
 
-שלב עיצוב. עדיין אין קוד, ולא נקבעו טכנולוגיות.
+בונים את ה-MVP לפי [docs/prd.md](docs/prd.md). השלב הנוכחי הוא שלב 1, הקמה.
+הטכנולוגיה (React, TypeScript, Tailwind ו-Supabase) היא הצעת ה-PRD, ועדיין מחכה לאישור הצוות.
 
-התוצרים הקרובים:
+## הרצה מקומית
 
-1. מפת מסכים לשני התפקידים.
-2. תרשימי מסכים ראשוניים (Wireframes).
-3. אבטיפוס לחיץ.
+צריך Node 22 ומעלה. **את המאגר משכפלים מחוץ ל-Google Drive**, כי Drive משבש את git ואת `node_modules`.
+
+```bash
+npm install
+cp .env.example .env.local   # למלא את הפרטים מ-Supabase → Project Settings → API
+npm run dev                  # http://localhost:5173, וגם מהטלפון באותה רשת
+npm test                     # לוגיקת השבוע ובדיקות ההרשאות על עותק מקומי של מסד הנתונים
+```
+
+הקמת Supabase חד-פעמית: להריץ את `supabase/migrations/001_schema.sql` ב-SQL Editor, ולהפעיל את Authentication → Anonymous sign-ins.
+אחר כך מריצים `npm run demo:reset`. הפקודה מוחקת את כל הנתונים וטוענת נתוני הדגמה בדויים, ולכן צריך `SUPABASE_SERVICE_ROLE_KEY` ו-`DEMO_PASSWORD` ב-`.env.local`.
 
 ## מבנה המאגר
 
 | קובץ | מה יש בו |
 |---|---|
+| [docs/prd.md](docs/prd.md) | ה-PRD לבניית ה-MVP (22.11.2026) |
 | [docs/spec.md](docs/spec.md) | מסמך האפיון המלא. **מקור האמת** של הפרויקט |
 | [CLAUDE.md](CLAUDE.md) | תקציר האפיון וכללי עבודה עבור Claude Code |
 | [.claude/](.claude/) | הגדרות Claude Code לפרויקט |
